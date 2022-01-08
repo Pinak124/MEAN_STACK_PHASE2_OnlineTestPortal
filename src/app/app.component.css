@@ -1,0 +1,19 @@
+
+body{
+    background-color: #eed1b7;
+}
+.navbar-nav{
+    width: 100% !important;
+}
+.nav-link{
+    color: #480bf1;
+    height: 20px;
+    width:auto;
+    display: flex;
+    align-items: center;
+    
+}
+.{
+    font-stretch: expanded;
+    font-size: 2000px;
+}

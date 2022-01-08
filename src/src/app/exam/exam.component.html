@@ -1,0 +1,41 @@
+<div>
+    <h3>Please select correct answer for each question</h3>
+    <form [formGroup]="examForm" (ngSubmit)="checkAnswers()">
+        <div *ngIf="examForm.invalid">All questions are mandatory</div>
+    <ol>
+        <li *ngFor="let ques of questionData,let i=index">
+           <span>{{ques.question}}</span> 
+            <div *ngFor="let ans of ques.answers,let j=index">
+                <input type="radio"  name="ques_{{i+1}}_ans" id="{{i+1}}{{j}}" value="{{i+1}}_{{j}}" formControlName="ques_{{i+1}}_ans" /> 
+                {{ans}}
+          </div>
+            <div class="errorMessage" *ngIf="!isValid">Answer is required ques_{{i+1}}_ans</div>
+            <span [hidden]="showTrue">Correct Answers is </span>
+            <div *ngIf="examForm.get(answer_ques_names[i])?.errors?.required" style="color: red">* Answer is required.</div>
+            
+            
+        </li>
+    </ol>
+
+
+    <div class="form-group">
+        <label for="gender">Gender:</label>
+        <div>
+          <input id="male" type="radio" value="male" name="gender" formControlName="gender">
+          <label for="male">Male</label>
+       </div>
+
+       <div>
+          <input id="female" type="radio" value="female" name="gender" formControlName="gender">
+          <label for="female">Female</label>
+       </div>
+          
+        
+            <div *ngIf="examForm.controls.gender.errors?.required">gender is required.</div>
+        
+    </div>
+    
+  <input type="submit" value="Submit Answers"  />
+</form>
+  
+</div>

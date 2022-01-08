@@ -1,0 +1,40 @@
+<div>
+    <div  *ngIf="pass || fail" >
+    <div *ngIf=pass style="color: green; font-size: large; font-weight: bold;">Congratulations!!You have passed . Your score is {{correct_ans_count}}/10</div>
+    <div *ngIf=fail style="color: red; font-size: large; font-weight: bold;">Sorry! you did not pass. Your score is {{correct_ans_count}}/10 Please check your answers.</div>
+</div> 
+<div>
+
+
+</div> 
+    <h3>Please select correct answer for each question</h3>
+    <form [formGroup]="examForm" (ngSubmit)="checkAnswers()">
+       
+    <ol>
+        <li *ngFor="let ques of questionData,let i=index">
+           <span>{{ques.question}}</span> 
+            <div *ngFor="let ans of ques.answers,let j=index">
+                {{j+1}}. <input type="radio"  name="ques_{{i+1}}_ans" id="{{i+1}}{{j}}" value="{{j+1}}" formControlName="ques_{{i+1}}_ans" /> 
+                {{ans}}
+              
+          </div>
+          <p  *ngIf="(correct_ans2[i]!=selected_ans[i] && showTrue)"  style="float: right;color: green;">Correct Ans is Option {{ques.correct}}</p>
+          <P *ngIf="(correct_ans2[i]!=selected_ans[i] && showTrue)" style="color: red;" >you selected Option {{selected_ans[i]}}</P>
+            
+    
+            <div *ngIf="(examForm.get(answer_ques_names[i])?.errors?.required )" style="color: red">* Answer is required.</div> <hr><br>
+       
+            
+        </li>
+    </ol>
+
+    
+  <!--<input type="submit" value="Submit" [disabled]="examForm.invalid"  />-->
+  <div class="d-flex justify-content-center">
+  <button class="btn btn-primary" [disabled]="examForm.invalid">Submit Answers</button><br><br>
+  
+</div >
+<div class="validation" *ngIf="examForm.invalid" > *All questions are mandatory</div>
+</form>
+  
+</div>
